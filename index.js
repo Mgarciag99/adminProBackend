@@ -16,9 +16,9 @@ dbConnection();
 //3lco4Pzrvvhy9R8C
 //rutas
 app.use( '/api/users', require('./routes/users') );
+app.use( '/api/hospital', require('./routes/hospitals') );
+app.use( '/api/medico', require('./routes/medico') );
 app.use( '/api/login', require('./routes/auth') );
-
-
 
 
 
