@@ -4,8 +4,14 @@ const hospital = require('../models/medico')
 const { generateJWT } = require('../helpers/jwt')
 const Medico = require('../models/medico')
 
-const getMedico = async( req, res ) => {
-
+const getMedico = async( req, res = response ) => {
+    const medicos = await Medico.find()
+    .populate('user', 'name img')
+    .populate('hospital', 'name img')
+    res.json({
+        ok: true,
+        medicos
+    })
 }
 
 const createMedico = async( req, res = response) => {

@@ -18,7 +18,9 @@ dbConnection();
 app.use( '/api/users', require('./routes/users') );
 app.use( '/api/hospital', require('./routes/hospitals') );
 app.use( '/api/medico', require('./routes/medico') );
+app.use( '/api/all', require('./routes/search') );
 app.use( '/api/login', require('./routes/auth') );
+app.use( '/api/upload', require('./routes/uploads') );
 
 
 
