@@ -3,8 +3,13 @@ const bcrypt = require('bcryptjs')
 const { generateJWT } = require('../helpers/jwt')
 const Hospital = require('../models/hospital')
 
-const getHospitals = async( req, res ) => {
-    
+const getHospitals = async( req, res = response ) => {
+    const hospitales = await Hospital.find()
+    .populate('user', 'name')
+    res.json({
+        ok: true,
+        hospitales
+    })
 }
 
 const createHospital = async( req, res = response ) => {
