@@ -22,11 +22,15 @@ router.post( '/',
 
 router.put( '/:id', 
     [
+        validateJWT,
+        check('name', 'Nombre es Obligatorio').not().isEmpty(),
+        validateInputs
     ],
     updateHospital
 )
 
-router.delete( '/:id', 
+router.delete( '/:id',
+    validateJWT,
     deleteHospital
 )
 

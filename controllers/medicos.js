@@ -42,11 +42,66 @@ const createMedico = async( req, res = response) => {
 }
 
 const updateMedico = async( req, res = response ) => {
+    const id = req.params.id;
+    const uid = req.uid;
 
+    try {
+
+        const medicoDB = await Medico.findById( id )
+        if( !medicoDB ){
+            res.status(404).msg({
+                ok: false,
+                msg: 'No existe un medico con el id especificado'
+            })
+        }
+
+        const newInputs = {
+            ...req.body,
+            user: uid
+        }   
+
+        const medicoUpdate = await Medico.findByIdAndUpdate( id, newInputs, { new: true } )
+        res.json({
+            ok: true,
+            medicoUpdate
+        })    
+        
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).msg({
+            ok: false,
+            msg: 'Contacte al administrador'
+        })
+    }
 }
 
 const deleteMedico = async( req, res = response ) => {
+    const id = req.params.id;
+    try {
 
+        const medicoDB = await Medico.findById( id )
+        if( !medicoDB ){
+            res.status(404).msg({
+                ok: false,
+                msg: 'No existe un medico con el id especificado'
+            })
+        }
+
+        await Medico.findByIdAndDelete( id )
+        res.json({
+            ok: true,
+            msg: 'success'
+        })    
+        
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).msg({
+            ok: false,
+            msg: 'Contacte al administrador'
+        })
+    }
 }
 
 module.exports = {

@@ -23,6 +23,10 @@ router.post('/',
 
 router.put('/:id',
     [
+        validateJWT,
+        check('name', 'El nombre es obligatorio').not().isEmpty(),
+        check('hospital', 'El hospital es requerido').isMongoId(),
+        validateInputs
     ],
     updateMedico    
 )
